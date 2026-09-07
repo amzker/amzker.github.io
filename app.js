@@ -12,7 +12,8 @@
   class SoundEngine {
     constructor() {
       this.ctx = null;
-      this.enabled = false;
+      const saved = localStorage.getItem('amzker_sfx_enabled');
+      this.enabled = saved !== null ? saved === 'true' : true; // Sound ON by default
     }
 
     init() {
@@ -30,11 +31,14 @@
     toggle() {
       this.init();
       this.enabled = !this.enabled;
+      localStorage.setItem('amzker_sfx_enabled', this.enabled);
       return this.enabled;
     }
 
     playClick() {
-      if (!this.enabled || !this.ctx) return;
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -50,8 +54,28 @@
       } catch (e) {}
     }
 
+    beep(frequency = 440, type = 'sine', duration = 0.08) {
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
+      try {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
+        gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
     playPulse() {
-      if (!this.enabled || !this.ctx) return;
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -68,7 +92,9 @@
     }
 
     playRev() {
-      if (!this.enabled || !this.ctx) return;
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -85,7 +111,9 @@
     }
 
     playGlitch() {
-      if (!this.enabled || !this.ctx) return;
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
       try {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
@@ -492,7 +520,8 @@
       const command = parts[0].toLowerCase();
       const arg = parts.slice(1).join(' ').toLowerCase();
 
-      this.printLine(`<span class="prompt-prefix">amzker@cyberdeck:~$</span> ${this.escape(rawCmd)}`);
+      const prefix = this.promptPrefix || 'amzker@main-character:~$';
+      this.printLine(`<span class="prompt-prefix">${prefix}</span> ${this.escape(rawCmd)}`);
       sfx.playClick();
 
       switch (command) {
@@ -1099,6 +1128,219 @@ Demonstrations on YouTube: @amzker
   }
 
   // ==========================================
+  // 11. CRINGE / HYPE RANGE SLIDER MANAGER
+  // ==========================================
+  class HypeLevelManager {
+    constructor() {
+      this.toast = document.getElementById('cringe-toast');
+      this.slider = document.getElementById('cringe-slider');
+      this.heroSlider = document.getElementById('hero-cringe-slider');
+      this.heroFill = document.getElementById('hero-slider-fill');
+      this.badge = document.getElementById('cringe-badge');
+      this.heroBadge = document.getElementById('hero-cringe-badge');
+      this.heroBadgeText = document.getElementById('hero-badge-text');
+      this.labels = document.querySelectorAll('.slider-label');
+      this.tierCards = document.querySelectorAll('.tier-card');
+      this.toastTimeout = null;
+
+      this.levels = {
+        0: {
+          badge: 'Grounded',
+          fullName: '0% Grounded',
+          toast: 'Grounded 0%: Understated, senior engineering specs.',
+          tag: 'Senior AI/ML & Systems Developer',
+          title: `AI infrastructure, <br><span class="gradient-text">async systems &amp;</span> <span class="accent-italic">developer tooling.</span>`,
+          subtitle: `Building production asyncio profilers, low-latency ASGI process managers, multi-agent frameworks, experimental EMG hardware interfaces, and Godot game engines.`,
+          spinners: `A 3D physics-based combat game built in Godot Engine featuring rigid-body angular momentum, customizable chassis builds, and local network multiplayer.`,
+          loopsentry: `Python asyncio event-loop profiler detecting blocking synchronous calls and slow coroutines. Captures stack traces, CPU/memory metrics, and generates standalone HTML reports.`,
+          tcup: `Human-computer interaction prototype using EMG piezo sensors, custom XIAO ESP32S3 PCB, and CNN models for muscle signal classification.`,
+          about1: `Amzker is a self-taught Senior AI/ML and Systems Engineer with over 12 years of programming experience, specializing in multi-agent LLM orchestration, production async Python systems, high-performance search, and PyPI-published developer tooling.`,
+          about2: `Also holds a Doctor of Pharmacy (PharmD, 9.6 GPA) with deep background in medicinal chemistry, toxicology, biostatistics, and wet-lab extractions.`,
+          status: 'STATUS: READY',
+          pill1: 'RUNTIME: ASYNC PYTHON',
+          pill2: 'PYPI PACKAGES: 3',
+          termTitle: 'amzker@workstation:~ (sh)',
+          promptPrefix: 'amzker@workstation:~$'
+        },
+        1: {
+          badge: 'Tech Bro',
+          fullName: '50% Tech Bro',
+          toast: 'Tech Bro 50%: 10x builder, disruption & agent pipelines active 🚀',
+          tag: '10x Builder · AI Infrastructure · Disruptor',
+          title: `Shipping AI infrastructure, <br><span class="gradient-text">hyper-scale async &amp;</span> <span class="accent-italic">neural interfaces.</span>`,
+          subtitle: `Building zero-to-one developer infrastructure on PyPI, low-latency async proxies, autonomous agent pipelines, and custom EMG hardware from scratch.`,
+          spinners: `High-velocity 3D physics game built in Godot—disrupting rigid-body angular momentum, modular combat builds, and arena mechanics.`,
+          loopsentry: `Mission-critical asyncio profiler detecting bottleneck coroutines and event-loop stalls with zero-friction HTML reporting.`,
+          tcup: `Next-gen human-computer interface protocol leveraging EMG sensors, custom ESP32S3 silicon, and neural networks to eliminate mice and keyboards.`,
+          about1: `Amzker is a 10x builder and AI/Systems Engineer with 12+ years of coding experience, shipping high-impact LLM agent frameworks and published PyPI developer tooling.`,
+          about2: `Bridging computational pharmacology and wet-lab medicinal chemistry with high-throughput distributed systems.`,
+          status: 'STATUS: DISRUPTING',
+          pill1: 'STACK: 10X PYTHON',
+          pill2: 'PYPI PACKAGES: 3',
+          termTitle: 'amzker@unicorn-hq:~ (sh)',
+          promptPrefix: 'amzker@unicorn-hq:~$'
+        },
+        2: {
+          badge: 'Main Character',
+          fullName: '100% Main Character',
+          toast: 'Main Character 100%: FULL ANIME PROTAGONIST MODE UNLOCKED 🕶️',
+          tag: 'AI Systems · Async Infrastructure · Neural Interfaces',
+          title: `Software, systems <br><span class="gradient-text">&amp; interactive</span> <span class="accent-italic">physics.</span>`,
+          subtitle: `Engineering production developer tooling, low-latency L7 async proxies, multi-agent frameworks, experimental EMG neural-motor hardware, and 3D simulation engines from the metal up.`,
+          spinners: `High-velocity 3D mechanical combat where rigid-body angular momentum, custom modular builds, and split-second gyroscopic maneuvers decide who controls the ring.`,
+          loopsentry: `Detect blocking synchronous calls, slow coroutines, and CPU-bound loops in asyncio applications. Captures stack traces, function arguments, CPU/memory/GC metrics, and exports standalone HTML diagnostic reports and a CLI TUI.`,
+          tcup: `Neural-motor interface using piezo/EMG sensors, custom Seeed Studio XIAO ESP32S3 PCB, and CNN models mapping muscle signals to discrete input actions.`,
+          about1: `Self-taught Senior AI/ML and Systems Engineer with over 12 years of programming experience, specializing in multi-agent LLM orchestration, production async Python systems, high-performance search, and PyPI-published developer tooling.`,
+          about2: `Also holds a Doctor of Pharmacy (PharmD, 9.6 GPA) with deep background in medicinal chemistry, toxicology, biostatistics, and wet-lab extractions.`,
+          status: 'STATUS: ONLINE',
+          pill1: 'KERNEL: AMZUX 2.6',
+          pill2: 'PYPI PACKAGES: 3',
+          termTitle: 'amzker@main-character:~ (sh)',
+          promptPrefix: 'amzker@main-character:~$'
+        }
+      };
+
+      this.currentLevel = 2;
+      this.init();
+    }
+
+    init() {
+      const saved = localStorage.getItem('amzker_cringe_level');
+      if (saved !== null && this.levels[saved]) {
+        this.currentLevel = parseInt(saved, 10);
+      }
+
+      // HUD range slider listener
+      if (this.slider) {
+        this.slider.value = this.currentLevel;
+        this.slider.addEventListener('input', (e) => {
+          this.setLevel(parseInt(e.target.value, 10), true);
+        });
+      }
+
+      // Hero range slider listener
+      if (this.heroSlider) {
+        this.heroSlider.value = this.currentLevel;
+        this.heroSlider.addEventListener('input', (e) => {
+          this.setLevel(parseInt(e.target.value, 10), true);
+        });
+      }
+
+      // HUD clickable labels
+      this.labels.forEach(lbl => {
+        lbl.addEventListener('click', (e) => {
+          const target = e.currentTarget;
+          const lvl = parseInt(target.dataset.cringe, 10);
+          this.setLevel(lvl, true);
+        });
+      });
+
+      // Hero clickable tier cards
+      this.tierCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const lvl = parseInt(card.dataset.cringe, 10);
+          this.setLevel(lvl, true);
+        });
+      });
+
+      this.setLevel(this.currentLevel, false);
+    }
+
+    setLevel(lvl, userTriggered = true) {
+      if (!this.levels[lvl]) return;
+      this.currentLevel = lvl;
+      localStorage.setItem('amzker_cringe_level', lvl);
+
+      // Sync both sliders
+      if (this.slider) this.slider.value = lvl;
+      if (this.heroSlider) this.heroSlider.value = lvl;
+
+      const data = this.levels[lvl];
+
+      // Update Hero Slider Track Fill
+      if (this.heroFill) {
+        const fillWidths = { 0: '0%', 1: '50%', 2: '100%' };
+        this.heroFill.style.width = fillWidths[lvl];
+      }
+
+      // Update HUD Badge
+      if (this.badge) {
+        this.badge.innerText = data.badge;
+        this.badge.className = `cringe-badge tier-${lvl}`;
+      }
+
+      // Update Hero Badge
+      if (this.heroBadge) {
+        this.heroBadge.className = `console-badge tier-${lvl}`;
+      }
+      if (this.heroBadgeText) {
+        this.heroBadgeText.innerText = data.fullName;
+      }
+
+      // Update HUD Labels
+      this.labels.forEach(lbl => {
+        lbl.classList.toggle('active', parseInt(lbl.dataset.cringe, 10) === lvl);
+      });
+
+      // Update Hero Tier Cards
+      this.tierCards.forEach(card => {
+        card.classList.toggle('active', parseInt(card.dataset.cringe, 10) === lvl);
+      });
+
+      // Update copy elements across the page
+      const heroTag = document.getElementById('hero-tag-text');
+      const heroTitle = document.getElementById('hero-title');
+      const heroSub = document.getElementById('hero-subtitle');
+      const spinnersDesc = document.getElementById('spinners-desc');
+      const loopsentryDesc = document.getElementById('loopsentry-desc');
+      const tcupDesc = document.getElementById('tcup-desc');
+      const aboutDesc1 = document.getElementById('about-desc-1');
+      const aboutDesc2 = document.getElementById('about-desc-2');
+      const telemStatus = document.getElementById('telemetry-status');
+      const telemPill1 = document.getElementById('telemetry-pill-1');
+      const telemPill2 = document.getElementById('telemetry-pill-2');
+      const termTitle = document.querySelector('.terminal-title');
+
+      if (heroTag) heroTag.innerText = data.tag;
+      if (heroTitle) heroTitle.innerHTML = data.title;
+      if (heroSub) heroSub.innerText = data.subtitle;
+      if (spinnersDesc) spinnersDesc.innerText = data.spinners;
+      if (loopsentryDesc) loopsentryDesc.innerText = data.loopsentry;
+      if (tcupDesc) tcupDesc.innerText = data.tcup;
+      if (aboutDesc1) aboutDesc1.innerText = data.about1;
+      if (aboutDesc2) aboutDesc2.innerText = data.about2;
+      if (telemStatus) telemStatus.innerText = data.status;
+      if (telemPill1) telemPill1.innerText = data.pill1;
+      if (telemPill2) telemPill2.innerText = data.pill2;
+      if (termTitle) termTitle.innerText = data.termTitle;
+
+      // Update terminal prompt
+      if (window.interactiveTerminal) {
+        window.interactiveTerminal.promptPrefix = data.promptPrefix;
+      }
+
+      if (userTriggered) {
+        if (sfx) {
+          if (lvl === 0) sfx.beep(440, 'sine', 0.08);
+          else if (lvl === 1) sfx.beep(587.33, 'triangle', 0.09);
+          else sfx.beep(880, 'sawtooth', 0.1);
+        }
+        this.showToast(data.toast);
+      }
+    }
+
+    showToast(msg) {
+      if (!this.toast) return;
+      this.toast.innerText = msg;
+      this.toast.classList.add('show');
+      clearTimeout(this.toastTimeout);
+      this.toastTimeout = setTimeout(() => {
+        this.toast.classList.remove('show');
+      }, 2600);
+    }
+  }
+
+  // ==========================================
   // INITIALIZATION ON DOM READY
   // ==========================================
   document.addEventListener('DOMContentLoaded', () => {
@@ -1128,6 +1370,9 @@ Demonstrations on YouTube: @amzker
     initSpinnerDial();
     initSpotlightTracker();
 
+    // Hype / Cringe Manager
+    window.hypeManager = new HypeLevelManager();
+
     document.getElementById('dock-term')?.addEventListener('click', () => terminal.toggle());
     document.getElementById('dock-loopsentry')?.addEventListener('click', () => {
       document.getElementById('loopsentry')?.scrollIntoView({ behavior: 'smooth' });
@@ -1142,6 +1387,32 @@ Demonstrations on YouTube: @amzker
     });
     document.getElementById('dock-sfx')?.addEventListener('click', () => toggleSfx());
     document.getElementById('hud-sfx-toggle')?.addEventListener('click', () => toggleSfx());
+
+    // Sync SFX state with UI on load (sound ON by default)
+    updateSfxHud(sfx.enabled);
+
+    // One-time gesture listener to unlock Web Audio API on first user interaction
+    const unlockAudio = () => {
+      if (sfx.enabled) sfx.init();
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('keydown', unlockAudio);
+    };
+    window.addEventListener('pointerdown', unlockAudio, { once: true });
+    window.addEventListener('keydown', unlockAudio, { once: true });
+
+    // Auto-hide bottom dock in Hero section so it never overlaps hero buttons or tier cards
+    const dock = document.querySelector('.desktop-dock');
+    if (dock) {
+      const updateDockVisibility = () => {
+        if (window.scrollY < 120) {
+          dock.classList.add('dock-hidden');
+        } else {
+          dock.classList.remove('dock-hidden');
+        }
+      };
+      window.addEventListener('scroll', updateDockVisibility, { passive: true });
+      updateDockVisibility();
+    }
 
     document.querySelectorAll('.btn, .dock-item, .hud-btn').forEach(el => {
       el.addEventListener('click', () => sfx.playClick());

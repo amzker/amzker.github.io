@@ -28,41 +28,70 @@
   <!-- TOP HUD HEADER -->
   <header class="site-hud">
     <div class="hud-container">
-      <div class="hud-brand">
+      <!-- Left: Brand Logo -->
+      <div class="hud-left">
         <a href="#top" class="logo-badge" aria-label="Amzker Home">
           <span class="logo-symbol">A</span>
-          <span>AMZKER<span style="color: var(--acid);">/</span></span>
+          <span class="logo-text">AMZKER<span style="color: var(--acid);">/</span></span>
         </a>
       </div>
 
-      <div class="hud-telemetry" aria-hidden="true">
-        <div class="telemetry-item">
-          <span class="status-pulse"></span>
-          <span>SYSTEM ONLINE</span>
-        </div>
-        <div class="telemetry-item">
-          <span class="telemetry-pill">KERNEL: AMZUX 2.6</span>
-        </div>
-        <div class="telemetry-item">
-          <span class="telemetry-pill">PYPI PACKAGES: 3</span>
+      <!-- Center: Prominent Cringe / Tone Range Slider -->
+      <div class="hud-center">
+        <div class="cringe-slider-hud" role="group" aria-label="Portfolio Tone & Cringe Slider">
+          <div class="cringe-slider-header">
+            <span class="cringe-slider-title">
+              <span class="hud-led-dot"></span>
+              <span class="cringe-title-text">TONE:</span>
+            </span>
+            <span id="cringe-badge" class="cringe-badge">Main Character</span>
+          </div>
+          <div class="slider-track-wrap">
+            <div class="hud-slider-notches" aria-hidden="true">
+              <span class="hud-notch" style="left: 0%;"></span>
+              <span class="hud-notch" style="left: 50%;"></span>
+              <span class="hud-notch" style="left: 100%;"></span>
+            </div>
+            <input type="range" id="cringe-slider" class="cringe-range-input tactile-slider" min="0" max="2" step="1" value="2" aria-label="Cringe Level Slider">
+            <div class="slider-labels">
+              <span class="slider-label" data-cringe="0">
+                <span class="lbl-full">0% Grounded</span>
+                <span class="lbl-short">0%</span>
+              </span>
+              <span class="slider-label" data-cringe="1">
+                <span class="lbl-full">50% Tech Bro</span>
+                <span class="lbl-short">50%</span>
+              </span>
+              <span class="slider-label active" data-cringe="2">
+                <span class="lbl-full">100% Main Character</span>
+                <span class="lbl-short">100%</span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <nav class="hud-nav" aria-label="Primary Navigation">
-        <a href="#work" class="nav-link">Work</a>
-        <a href="#lab" class="nav-link">Lab &amp; Research</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="https://github.com/amzker" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub ↗</a>
-      </nav>
+      <!-- Right: Navigation & Actions -->
+      <div class="hud-right">
+        <nav class="hud-nav" aria-label="Primary Navigation">
+          <a href="#work" class="nav-link">Work</a>
+          <a href="#lab" class="nav-link">Lab</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="https://github.com/amzker" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub ↗</a>
+        </nav>
 
-      <div class="hud-actions">
-        <button id="hud-sfx-toggle" class="hud-btn" aria-label="Toggle synthesized sound effects">SFX: MUTED</button>
-        <button id="cmd-palette-trigger" class="hud-btn" aria-label="Open command palette">
-          <span>⌘K</span>
-        </button>
+        <div class="hud-actions">
+          <button id="hud-sfx-toggle" class="hud-btn active" aria-label="Toggle synthesized sound effects">SFX: ON</button>
+          <button id="cmd-palette-trigger" class="hud-btn" aria-label="Open command palette">
+            <span>⌘K</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
+
+  <!-- HYPE CHANGE TOAST NOTIFICATION -->
+  <div id="cringe-toast" class="cringe-toast" role="status" aria-live="polite"></div>
 
   <!-- HERO SECTION -->
   <main id="top">
@@ -70,7 +99,7 @@
       <div class="hero-content">
         <div class="hero-tag">
           <span class="status-pulse"></span>
-          <span>AI Systems · Async Infrastructure · Neural Interfaces</span>
+          <span id="hero-tag-text">AI Systems · Async Infrastructure · Neural Interfaces</span>
         </div>
         
         <h1 id="hero-title" class="hero-title">
@@ -78,9 +107,62 @@
           <span class="gradient-text">async systems &amp;</span> <span class="accent-italic">neural interfaces.</span>
         </h1>
         
-        <p class="hero-subtitle">
+        <p id="hero-subtitle" class="hero-subtitle">
           Engineering production developer tooling, low-latency L7 async proxies, multi-agent frameworks, experimental EMG neural-motor hardware, and 3D simulation engines from the metal up.
         </p>
+
+        <!-- PROMINENT HERO TONE & CRINGE CONSOLE -->
+        <div class="hero-tone-console" role="region" aria-label="Portfolio Tone &amp; Cringe Controller">
+          <div class="console-header-row">
+            <div class="console-title-group">
+              <span class="console-led"></span>
+              <span class="console-label">PORTFOLIO TONE · CRINGE METER</span>
+              <span class="console-sub">Drag fader or click a tier to re-voice entire site:</span>
+            </div>
+            <div id="hero-cringe-badge" class="console-badge tier-2">
+              <span class="badge-dot"></span>
+              <span id="hero-badge-text">100% Main Character</span>
+            </div>
+          </div>
+
+          <!-- The Mechanical Slider Track -->
+          <div class="console-slider-track-wrap">
+            <div class="console-track-groove">
+              <div id="hero-slider-fill" class="console-track-fill" style="width: 100%;"></div>
+              <div class="console-detents" aria-hidden="true">
+                <div class="detent" style="left: 0%;"><span class="detent-line"></span><span class="detent-pip">0%</span></div>
+                <div class="detent" style="left: 50%;"><span class="detent-line"></span><span class="detent-pip">50%</span></div>
+                <div class="detent" style="left: 100%;"><span class="detent-line"></span><span class="detent-pip">100%</span></div>
+              </div>
+              <input type="range" id="hero-cringe-slider" class="hero-tactile-input" min="0" max="2" step="1" value="2" aria-label="Hero Cringe Slider">
+            </div>
+          </div>
+
+          <!-- Interactive Clickable Tier Cards -->
+          <div class="console-tier-cards">
+            <button type="button" class="tier-card" data-cringe="0">
+              <div class="tier-card-head">
+                <span class="tier-pct">0%</span>
+                <span class="tier-name">Grounded</span>
+              </div>
+              <span class="tier-desc">Senior systems engineer specs · measured &amp; zero hype</span>
+            </button>
+            <button type="button" class="tier-card" data-cringe="1">
+              <div class="tier-card-head">
+                <span class="tier-pct">50%</span>
+                <span class="tier-name">Tech Bro</span>
+              </div>
+              <span class="tier-desc">10x builder · disruption, agent pipelines &amp; hyper-growth</span>
+            </button>
+            <button type="button" class="tier-card active" data-cringe="2">
+              <div class="tier-card-head">
+                <span class="tier-pct">100%</span>
+                <span class="tier-name">Main Character</span>
+              </div>
+              <span class="tier-desc">Full anime protagonist · from the metal up &amp; pure hype</span>
+            </button>
+          </div>
+        </div>
 
         <div class="hero-actions">
           <a href="#work" class="btn btn-primary">
@@ -150,7 +232,7 @@
               <span class="bento-tag" style="color: var(--acid); border-color: rgba(200, 255, 69, 0.3);">3D COMBAT</span>
             </div>
             <h3>Spinners Arena</h3>
-            <p>
+            <p id="spinners-desc">
               High-velocity 3D mechanical combat where rigid-body angular momentum, custom modular builds, and split-second gyroscopic maneuvers decide who controls the ring.
             </p>
             <ul class="tag-list" aria-label="Key features">
@@ -183,7 +265,7 @@
                 </div>
               </div>
               <h3 class="bento-title">LoopSentry</h3>
-              <p class="bento-desc">
+              <p id="loopsentry-desc" class="bento-desc">
                 Detect blocking synchronous calls, slow coroutines, and CPU-bound loops in asyncio applications. Captures stack traces, function arguments, CPU/memory/GC metrics, and exports standalone HTML diagnostic reports and a CLI TUI.
               </p>
 
@@ -240,7 +322,7 @@
                 <span class="bento-tag" style="color: var(--cyan); border-color: rgba(56, 189, 248, 0.3);">EMG / HCI</span>
               </div>
               <h3 class="bento-title">Thought to Computer</h3>
-              <p class="bento-desc">
+              <p id="tcup-desc" class="bento-desc">
                 Neural-motor interface using piezo/EMG sensors, custom Seeed Studio XIAO ESP32S3 PCB, and CNN models mapping muscle signals to discrete input actions.
               </p>
 
@@ -386,7 +468,7 @@
         </div>
       </section>
 
-      <!-- CYBER-PHYSICAL LAB & RESEARCH SECTION -->
+      <!-- LAB & RESEARCH SECTION -->
       <section id="lab" class="lab-section" aria-labelledby="lab-title">
         <div class="section-header">
           <div>
@@ -448,10 +530,10 @@
         <div class="about-text">
           <div class="section-eyebrow">03 / Profile</div>
           <h3 id="about-title">Amzker</h3>
-          <p>
+          <p id="about-desc-1">
             Self-taught Senior AI/ML and Systems Engineer with over 12 years of programming experience, specializing in multi-agent LLM orchestration, production async Python systems, high-performance search, and PyPI-published developer tooling.
           </p>
-          <p>
+          <p id="about-desc-2">
             Also holds a Doctor of Pharmacy (PharmD, 9.6 GPA) with deep background in medicinal chemistry, toxicology, biostatistics, and wet-lab extractions.
           </p>
 
@@ -510,7 +592,7 @@
       <span class="dock-tooltip">Spinners Arena</span>
     </button>
     <div class="dock-separator"></div>
-    <button id="dock-sfx" class="dock-item" aria-label="Toggle Sound Effects">
+    <button id="dock-sfx" class="dock-item active" aria-label="Toggle Sound Effects">
       <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
       <span class="dock-tooltip">Audio SFX</span>
     </button>
@@ -528,7 +610,7 @@
         <button id="term-min" class="terminal-dot dot-min" aria-label="Minimize Terminal"></button>
         <button id="term-max" class="terminal-dot dot-max" aria-label="Maximize Terminal"></button>
       </div>
-      <span class="terminal-title">amzker@cyberdeck:~ (sh)</span>
+      <span class="terminal-title">amzker@main-character:~ (sh)</span>
       <span class="terminal-actions-right">press `~` to toggle</span>
     </div>
 
