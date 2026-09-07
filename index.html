@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Amzker — AI/ML infrastructure, production async Python systems, neural-motor interfaces, developer tooling, and game engines.">
+  <meta name="theme-color" content="#07080b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Amzker — AI Infrastructure, Systems & Neural Interfaces">
+  <meta property="og:description" content="Production async systems, PyPI developer tooling, multi-agent frameworks, neural-motor interfaces, and game engines.">
+  <title>Amzker — AI Infrastructure, Systems &amp; Neural Interfaces</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Visual Layers -->
+  <div class="ambient-grid"></div>
+  <div class="ambient-glow"></div>
+
+  <!-- Full-Page Interactive Kinetic Particle Canvas -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- TOP HUD HEADER -->
+  <header class="site-hud">
+    <div class="hud-container">
+      <div class="hud-brand">
+        <a href="#top" class="logo-badge" aria-label="Amzker Home">
+          <span class="logo-symbol">A</span>
+          <span>AMZKER<span style="color: var(--acid);">/</span></span>
+        </a>
+      </div>
+
+      <div class="hud-telemetry" aria-hidden="true">
+        <div class="telemetry-item">
+          <span class="status-pulse"></span>
+          <span>SYSTEM ONLINE</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-pill">KERNEL: AMZUX 2.6</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-pill">PYPI PACKAGES: 3</span>
+        </div>
+      </div>
+
+      <nav class="hud-nav" aria-label="Primary Navigation">
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#lab" class="nav-link">Lab &amp; Research</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="https://github.com/amzker" target="_blank" rel="noopener noreferrer" class="nav-link">GitHub ↗</a>
+      </nav>
+
+      <div class="hud-actions">
+        <button id="hud-sfx-toggle" class="hud-btn" aria-label="Toggle synthesized sound effects">SFX: MUTED</button>
+        <button id="cmd-palette-trigger" class="hud-btn" aria-label="Open command palette">
+          <span>⌘K</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main id="top">
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="status-pulse"></span>
+          <span>AI Systems · Async Infrastructure · Neural Interfaces</span>
+        </div>
+        
+        <h1 id="hero-title" class="hero-title">
+          AI infrastructure, <br>
+          <span class="gradient-text">async systems &amp;</span> <span class="accent-italic">neural interfaces.</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Engineering production developer tooling, low-latency L7 async proxies, multi-agent frameworks, experimental EMG neural-motor hardware, and 3D simulation engines from the metal up.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">
+            <span>Explore Engineering</span>
+            <svg class="svg-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          </a>
+          <button id="hero-term-btn" class="btn btn-terminal" onclick="window.interactiveTerminal &amp;&amp; window.interactiveTerminal.toggle(true)">
+            <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            <span>Launch Shell</span> <code style="font-size: 0.8rem;">[~]</code>
+          </button>
+          <a href="https://www.youtube.com/@amzker" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <span>YouTube Lab ↗</span>
+          </a>
+        </div>
+
+        <!-- Interactive Kinetic Field Mode Switcher -->
+        <div class="physics-hud" role="group" aria-label="Kinetic Field Modes">
+          <span class="physics-label">
+            <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+            INTERACTIVE FIELD:
+          </span>
+          <button class="physics-mode-btn active" data-mode="zerog">Zero-G</button>
+          <button class="physics-mode-btn" data-mode="orbit">Orbit</button>
+          <button class="physics-mode-btn" data-mode="vortex">Vortex</button>
+          <button class="physics-mode-btn" data-mode="repel">Repel</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN PORTFOLIO WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- FEATURED PROJECT: SPINNERS ARENA -->
+      <section id="work" class="work-section" aria-labelledby="work-title">
+        <div class="section-header">
+          <div>
+            <div class="section-eyebrow">01 / Flagship Engineering</div>
+            <h2 id="work-title" class="section-title">Selected Projects.</h2>
+          </div>
+          <p class="section-desc">
+            Production async profilers, PyPI packages, neural-motor hardware interfaces, and real-time game engines.
+          </p>
+        </div>
+
+        <article class="spotlight-card featured-showcase" id="spinners-card">
+          <div class="featured-visual-container">
+            <span class="featured-badge">FLAGSHIP 3D GAME · GODOT ENGINE</span>
+            <img class="featured-visual-img" src="https://amzker.github.io/spinners-arena-web/hero_banner.png" alt="Spinners Arena mechanical combatants in neon arena" loading="lazy">
+            <div class="featured-overlay"></div>
+            
+            <!-- Live Interactive Rev Meter -->
+            <div class="interactive-arena-dial" aria-label="Interactive Spinner RPM gauge">
+              <div id="spin-dial" class="spin-rpm-dial">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="stroke: var(--acid);"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="dial-stats">
+                <span class="dial-label">TURBINE VELOCITY</span>
+                <span id="spin-val" class="dial-value">4,200 RPM</span>
+              </div>
+              <button id="spin-rev-btn" class="dial-rev-btn">REV TURBINE</button>
+            </div>
+          </div>
+
+          <div class="featured-copy featured-content">
+            <div class="project-meta-row">
+              <span class="project-category">GAME · GODOT · ANDROID</span>
+              <span class="bento-tag" style="color: var(--acid); border-color: rgba(200, 255, 69, 0.3);">3D COMBAT</span>
+            </div>
+            <h3>Spinners Arena</h3>
+            <p>
+              High-velocity 3D mechanical combat where rigid-body angular momentum, custom modular builds, and split-second gyroscopic maneuvers decide who controls the ring.
+            </p>
+            <ul class="tag-list" aria-label="Key features">
+              <li class="tag-item">Rigid-body Physics</li>
+              <li class="tag-item">Modular Chassis</li>
+              <li class="tag-item">Career Mode &amp; LAN</li>
+              <li class="tag-item">Godot Engine</li>
+            </ul>
+            <div class="project-actions">
+              <a href="/spinners-arena-web/" class="btn btn-primary" style="padding: 11px 22px; font-size: 0.88rem;">
+                <span>Enter The Arena ↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- BENTO GRID WITH LIVE INTERACTIVE WIDGETS -->
+        <div class="bento-grid">
+
+          <!-- 02. LOOPSENTRY (With Live Event Loop Profiler Simulator) -->
+          <article class="spotlight-card bento-item bento-col-8" id="loopsentry">
+            <div>
+              <div class="bento-top">
+                <div class="bento-icon">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <span class="pypi-pill"><code>uv add loopsentry</code></span>
+                  <span class="bento-tag" style="color: var(--acid); border-color: rgba(200, 255, 69, 0.3);">OBSERVABILITY</span>
+                </div>
+              </div>
+              <h3 class="bento-title">LoopSentry</h3>
+              <p class="bento-desc">
+                Detect blocking synchronous calls, slow coroutines, and CPU-bound loops in asyncio applications. Captures stack traces, function arguments, CPU/memory/GC metrics, and exports standalone HTML diagnostic reports and a CLI TUI.
+              </p>
+
+              <!-- Live Interactive Profiler Widget -->
+              <div class="loopsentry-widget" aria-label="Simulated Event Loop Monitor">
+                <div class="widget-header">
+                  <div class="widget-title">
+                    <span class="status-pulse"></span>
+                    <span>EVENT LOOP TASK MONITOR</span>
+                  </div>
+                  <div id="ls-badge" class="widget-badge" style="color: var(--acid); border-color: rgba(200,255,69,0.3); background: rgba(200,255,69,0.08);">
+                    HEALTHY
+                  </div>
+                </div>
+
+                <div class="flamegraph-sim">
+                  <div class="task-bar-row">
+                    <span class="task-name">io_worker_pool</span>
+                    <div class="task-progress-track">
+                      <div id="ls-bar-1" class="task-progress-fill" style="width: 38%;"></div>
+                    </div>
+                    <span id="ls-time-1" class="task-time">1.2ms</span>
+                  </div>
+                  <div class="task-bar-row">
+                    <span class="task-name">http_dispatcher</span>
+                    <div class="task-progress-track">
+                      <div class="task-progress-fill" style="width: 24%; background: linear-gradient(90deg, var(--violet), var(--cyan));"></div>
+                    </div>
+                    <span class="task-time">0.8ms</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem;">
+                  <span style="color: var(--text-dim);">Simulated Event Loop Latency</span>
+                  <button id="ls-run-btn" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-subtle); color: var(--text-muted); font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; cursor: pointer;">
+                    Inject Block Call ⚡
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://github.com/amzker/loopsentry" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>View Repository on GitHub ↗</span>
+            </a>
+          </article>
+
+          <!-- 03. THOUGHT TO COMPUTER USE PROTOCOL (TCUP) -->
+          <article class="spotlight-card bento-item bento-col-4" id="tcup">
+            <div>
+              <div class="bento-top">
+                <div class="bento-icon" style="color: var(--cyan);">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                </div>
+                <span class="bento-tag" style="color: var(--cyan); border-color: rgba(56, 189, 248, 0.3);">EMG / HCI</span>
+              </div>
+              <h3 class="bento-title">Thought to Computer</h3>
+              <p class="bento-desc">
+                Neural-motor interface using piezo/EMG sensors, custom Seeed Studio XIAO ESP32S3 PCB, and CNN models mapping muscle signals to discrete input actions.
+              </p>
+
+              <!-- Interactive EMG Signal Visualizer -->
+              <div class="tcup-canvas-container" title="Simulated EMG Microvolt Signal">
+                <canvas id="tcup-canvas"></canvas>
+                <button id="tcup-pulse-btn" class="tcup-pulse-btn">Trigger Motor Signal ⚡</button>
+              </div>
+            </div>
+
+            <div class="bento-link" style="color: var(--text-muted); cursor: default;">
+              <span>Hardware Prototype · ESP32S3 + CNN</span>
+            </div>
+          </article>
+
+          <!-- 04. LDCORN -->
+          <article class="spotlight-card bento-item bento-col-6" id="ldcorn">
+            <div>
+              <div class="bento-top">
+                <div class="bento-icon" style="color: var(--cyan);">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 9v12"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <span class="pypi-pill"><code>uv add ldcorn</code></span>
+                  <span class="bento-tag">ASGI PROXY</span>
+                </div>
+              </div>
+              <h3 class="bento-title">Ldcorn</h3>
+              <p class="bento-desc">
+                Async L7 reverse proxy and process manager for Uvicorn worker pools using UNIX domain sockets. Enables path-based routing, zero-downtime reloads via SIGHUP, per-group concurrency limits, and worker crash recovery.
+              </p>
+            </div>
+            <a href="https://github.com/amzker/ldcorn" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>View Repository on GitHub ↗</span>
+            </a>
+          </article>
+
+          <!-- 05. ASYNC AGENTIC -->
+          <article class="spotlight-card bento-item bento-col-6" id="asyncagentic">
+            <div>
+              <div class="bento-top">
+                <div class="bento-icon" style="color: var(--violet);">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <span class="pypi-pill" style="color: var(--violet); border-color: rgba(168, 85, 247, 0.3); background: rgba(168, 85, 247, 0.1);"><code>uv add asyncagentic</code></span>
+                  <span class="bento-tag">AI FRAMEWORK</span>
+                </div>
+              </div>
+              <h3 class="bento-title">Async Agentic</h3>
+              <p class="bento-desc">
+                Lightweight asynchronous framework for multi-agent LLM applications. Engineered with event hooks, parallel tool execution, integrated vision support, and stop/flow-trigger listeners.
+              </p>
+            </div>
+            <a href="https://github.com/amzker" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>View Framework on GitHub ↗</span>
+            </a>
+          </article>
+
+          <!-- 06. PLATFORMER AI (NEAT) -->
+          <article class="spotlight-card bento-item bento-col-6" id="platformerai">
+            <div>
+              <div class="bento-top">
+                <div class="bento-icon" style="color: var(--violet);">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <span class="bento-tag">GODOT · NEAT</span>
+              </div>
+              <h3 class="bento-title">Platformer AI</h3>
+              <p class="bento-desc">
+                Neuroevolution of Augmenting Topologies (NEAT) genetic algorithm training autonomous platformer agents from scratch in Godot.
+              </p>
+
+              <!-- Interactive NEAT Network Canvas -->
+              <div class="neat-canvas-container" title="Interactive NEAT Topology">
+                <canvas id="neat-canvas"></canvas>
+                <button id="mutate-neat-btn" class="neat-mutate-btn">Mutate Synapses ⟳</button>
+              </div>
+            </div>
+
+            <a href="https://github.com/amzker/PlatformerAI" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>View Repository on GitHub ↗</span>
+            </a>
+          </article>
+
+          <!-- 07. GSHEET GODOT -->
+          <article class="spotlight-card bento-item bento-col-6">
+            <div>
+              <div class="bento-top">
+                <div class="bento-icon" style="color: var(--gold);">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <span class="bento-tag">GDSCRIPT / API</span>
+              </div>
+              <h3 class="bento-title">Gsheet Godot</h3>
+              <p class="bento-desc">
+                Two-way Google Sheets integration for Godot with native READ and WRITE access, enabling live remote game balance adjustments and database synchronization.
+              </p>
+            </div>
+            <a href="https://github.com/amzker/Gsheet_Godot" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>View Repository on GitHub ↗</span>
+            </a>
+          </article>
+
+          <!-- 08. AMZUX LINUX DISTRO -->
+          <article class="spotlight-card bento-item bento-col-6">
+            <div>
+              <div class="bento-top">
+                <div class="bento-icon" style="color: var(--coral);">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <span class="bento-tag">LINUX / OS</span>
+              </div>
+              <h3 class="bento-title">Amzux</h3>
+              <p class="bento-desc">
+                Custom Debian-based Linux distribution optimized for pharmaceutical drug development and molecular docking studies, including a custom package format (.amzx) and automation scripting.
+              </p>
+            </div>
+            <a href="https://github.com/amzker/Amzux" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>View Repository on GitHub ↗</span>
+            </a>
+          </article>
+
+          <!-- 09. PARROTSEC ANDROID -->
+          <article class="spotlight-card bento-item bento-col-6">
+            <div>
+              <div class="bento-top">
+                <div class="bento-icon" style="color: #a855f7;">
+                  <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span class="bento-tag">SECURITY / ANDROID</span>
+              </div>
+              <h3 class="bento-title">ParrotSec Android</h3>
+              <p class="bento-desc">
+                Custom deployment of Parrot Security OS configured as a chroot environment on Android devices, bringing penetration testing toolchains into mobile runtime environments.
+              </p>
+            </div>
+            <a href="https://github.com/amzker/Parrotsec-Android" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>View Repository on GitHub ↗</span>
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- CYBER-PHYSICAL LAB & RESEARCH SECTION -->
+      <section id="lab" class="lab-section" aria-labelledby="lab-title">
+        <div class="section-header">
+          <div>
+            <div class="section-eyebrow">02 / Laboratory &amp; Video Demonstrations</div>
+            <h2 id="lab-title" class="section-title">Open Lab &amp; Research.</h2>
+          </div>
+          <p class="section-desc">
+            Documenting deep technical investigations across medicinal chemistry, machine learning from scratch, and reverse engineering.
+          </p>
+        </div>
+
+        <div class="lab-grid">
+          <article class="spotlight-card lab-card">
+            <div class="lab-type-pill">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M10 2v7.31L4.62 18.2A2 2 0 0 0 6.32 21h11.36a2 2 0 0 0 1.7-2.8L14 9.31V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><path d="M8.5 14h7"/></svg>
+              <span>CHEMICAL EXTRACTION</span>
+            </div>
+            <h4>Medicinal Chemistry &amp; Precipitates</h4>
+            <p>
+              Laboratory extractions isolating chemical active fractions, solvent reflux setups, and analyzing precipitation crystal formations from botanical specimens.
+            </p>
+            <a href="https://www.youtube.com/@amzker" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>Watch on YouTube ↗</span>
+            </a>
+          </article>
+
+          <article class="spotlight-card lab-card">
+            <div class="lab-type-pill" style="color: var(--cyan);">
+              <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>DEEP LEARNING</span>
+            </div>
+            <h4>ML Algorithms From Scratch</h4>
+            <p>
+              Implementing linear/polynomial regression, backpropagation, gradient descent, and custom neural topologies from pure mathematical foundations.
+            </p>
+            <a href="https://www.youtube.com/@amzker" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>Explore Implementations ↗</span>
+            </a>
+          </article>
+
+          <article class="spotlight-card lab-card">
+            <div class="lab-type-pill" style="color: var(--acid);">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>REVERSE ENGINEERING</span>
+            </div>
+            <h4>Bug Bounty &amp; System Hardening</h4>
+            <p>
+              Protocol vulnerability inspection, memory boundary analysis, and automating security reconnaissance workflows across targets.
+            </p>
+            <a href="https://www.youtube.com/@amzker" target="_blank" rel="noopener noreferrer" class="bento-link">
+              <span>View Research ↗</span>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about" class="about-section" aria-labelledby="about-title">
+        <div class="about-text">
+          <div class="section-eyebrow">03 / Profile</div>
+          <h3 id="about-title">Amzker</h3>
+          <p>
+            Self-taught Senior AI/ML and Systems Engineer with over 12 years of programming experience, specializing in multi-agent LLM orchestration, production async Python systems, high-performance search, and PyPI-published developer tooling.
+          </p>
+          <p>
+            Also holds a Doctor of Pharmacy (PharmD, 9.6 GPA) with deep background in medicinal chemistry, toxicology, biostatistics, and wet-lab extractions.
+          </p>
+
+          <div class="contact-badges">
+            <a href="https://github.com/amzker" target="_blank" rel="me noopener noreferrer" class="contact-pill">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <span>GitHub</span> <code style="color: var(--acid);">@amzker</code>
+            </a>
+            <a href="https://www.youtube.com/@amzker" target="_blank" rel="me noopener noreferrer" class="contact-pill">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+              <span>YouTube</span> <code style="color: var(--coral);">@amzker</code>
+            </a>
+            <a href="mailto:amzker@proton.me" class="contact-pill">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>Email</span> <code style="color: var(--cyan);">amzker@proton.me</code>
+            </a>
+            <a href="https://t.me/amzker" target="_blank" rel="me noopener noreferrer" class="contact-pill">
+              <svg class="svg-icon" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span>Telegram</span> <code style="color: var(--gold);">@amzker</code>
+            </a>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px; background: rgba(0,0,0,0.35); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-family: var(--font-mono); font-size: 0.8rem;">
+          <div style="color: var(--acid); font-weight: 700;">// TOOLCHAIN &amp; SPECIALIZATIONS</div>
+          <div style="display: grid; grid-template-columns: 110px 1fr; gap: 8px; color: var(--text-muted);">
+            <span>LANGUAGES:</span><span style="color: #fff;">Python, Go, Bash, GDScript, C</span>
+            <span>SYSTEMS:</span><span style="color: #fff;">asyncio, Uvicorn, UNIX sockets, mmap</span>
+            <span>AI / ML:</span><span style="color: #fff;">Multi-Agent, Transformers, Numba, NEAT</span>
+            <span>HARDWARE:</span><span style="color: #fff;">EMG / Piezo, XIAO ESP32S3, Custom PCB</span>
+            <span>ENGINES:</span><span style="color: #fff;">Godot 3D/2D, Rigid-body physics</span>
+            <span>DATABASES:</span><span style="color: #fff;">Redis, Milvus, ChromaDB, SQLite WAL</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FLOATING QUICK DOCK -->
+  <aside class="desktop-dock" aria-label="Quick Access Dock">
+    <button id="dock-term" class="dock-item" aria-label="Toggle Terminal">
+      <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      <span class="dock-tooltip">amzker-sh [~]</span>
+    </button>
+    <button id="dock-loopsentry" class="dock-item" aria-label="Jump to Loopsentry">
+      <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <span class="dock-tooltip">LoopSentry</span>
+    </button>
+    <button id="dock-tcup" class="dock-item" aria-label="Jump to TCUP Neural Interface">
+      <svg class="svg-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/></svg>
+      <span class="dock-tooltip">TCUP Neural</span>
+    </button>
+    <button id="dock-spinners" class="dock-item" aria-label="Jump to Spinners Arena">
+      <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span class="dock-tooltip">Spinners Arena</span>
+    </button>
+    <div class="dock-separator"></div>
+    <button id="dock-sfx" class="dock-item" aria-label="Toggle Sound Effects">
+      <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      <span class="dock-tooltip">Audio SFX</span>
+    </button>
+    <button id="dock-palette" class="dock-item" onclick="document.getElementById('cmd-palette-trigger').click()" aria-label="Open Command Palette">
+      <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span class="dock-tooltip">Search (⌘K)</span>
+    </button>
+  </aside>
+
+  <!-- DRAGGABLE TERMINAL WINDOW (amzker-sh) -->
+  <div id="terminal-window" class="terminal-window minimized" role="region" aria-label="Interactive Terminal Shell">
+    <div id="terminal-titlebar" class="terminal-titlebar">
+      <div class="terminal-controls">
+        <button id="term-close" class="terminal-dot dot-close" aria-label="Close Terminal"></button>
+        <button id="term-min" class="terminal-dot dot-min" aria-label="Minimize Terminal"></button>
+        <button id="term-max" class="terminal-dot dot-max" aria-label="Maximize Terminal"></button>
+      </div>
+      <span class="terminal-title">amzker@cyberdeck:~ (sh)</span>
+      <span class="terminal-actions-right">press `~` to toggle</span>
+    </div>
+
+    <div id="terminal-body" class="terminal-body">
+      <div class="terminal-output">
+Welcome to <span class="highlight">amzker-sh</span> [OS v2.6.4]
+Type <span class="highlight">help</span> to view commands, or explore:
+  • <span class="accent">projects</span>    List PyPI tools, neural interfaces &amp; systems
+  • <span class="accent">cat loopsentry</span> Inspect async profiler architecture
+  • <span class="accent">tcup --pulse</span>   Trigger EMG neural-motor spike
+  • <span class="accent">play spinners</span>  Rev up 3D combat momentum turbine
+  • <span class="accent">chem --lab</span>     Simulate chemistry extraction log
+      </div>
+    </div>
+
+    <div style="padding: 10px 16px; background: rgba(14, 17, 24, 0.95); border-top: 1px solid rgba(255,255,255,0.06);">
+      <div class="terminal-input-row">
+        <span class="terminal-prompt">amzker&gt;</span>
+        <input id="terminal-input" class="terminal-input" type="text" autocomplete="off" spellcheck="false" placeholder="Type a command (e.g. 'help', 'projects', 'tcup')...">
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMAND PALETTE MODAL (⌘K) -->
+  <div id="palette-modal" class="palette-modal-backdrop" role="dialog" aria-modal="true" aria-label="Command Palette">
+    <div class="palette-modal">
+      <div class="palette-search-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="palette-input" class="palette-search-input" type="text" placeholder="Type a command or jump to project...">
+        <span class="palette-kbd">ESC</span>
+      </div>
+      <div id="palette-results" class="palette-results"></div>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>© 2026 Amzker. Built with pure HTML, Vanilla CSS &amp; WebGL/Canvas.</p>
+      <div class="footer-links">
+        <a href="/app-ads.txt">Advertising Declaration</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
